@@ -257,6 +257,56 @@ class SDKServer {
   }
 
   async authenticateRequest(req: Request): Promise<User> {
+    // If OAuth is not configured, return a mock admin user for local development/testing
+    if (!ENV.oAuthServerUrl || !ENV.appId) {
+      const mockOpenId = "mock-admin-id";
+      let user = await db.getUserByOpenId(mockOpenId);
+
+      if (!user) {
+        try {
+          await db.upsertUser({
+            openId: mockOpenId,
+            name: "Mock Admin",
+            email: "admin@example.com",
+            loginMethod: "mock",
+            role: "admin",
+            lastSignedIn: new Date(),
+          });
+          user = await db.getUserByOpenId(mockOpenId);
+        } catch (error) {
+          // If DB is not available, return a transient mock user
+          return {
+            id: 0,
+            openId: mockOpenId,
+            name: "Mock Admin (Transient)",
+            email: "admin@example.com",
+            loginMethod: "mock",
+            role: "admin",
+            lastSignedIn: new Date(),
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          } as User;
+        }
+      }
+
+      if (!user) {
+        // Fallback for when upsert might have failed silently or returned null
+        return {
+          id: 0,
+          openId: mockOpenId,
+          name: "Mock Admin (Fallback)",
+          email: "admin@example.com",
+          loginMethod: "mock",
+          role: "admin",
+          lastSignedIn: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        } as User;
+      }
+
+      return user;
+    }
+
     // Regular authentication flow
     const cookies = this.parseCookies(req.headers.cookie);
     const sessionCookie = cookies.get(COOKIE_NAME);

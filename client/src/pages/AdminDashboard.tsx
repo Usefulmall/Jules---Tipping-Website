@@ -13,10 +13,10 @@ export default function AdminDashboard() {
   };
 
   // Check if user is admin
-  if (user?.role !== "admin") {
+  if (!user || user.role !== "admin") {
     return (
       <div style={{ padding: '20px', color: 'red' }}>
-        Access Denied. You are logged in as: {user?.fullName || 'Unknown'} ({user?.role || 'No Role'})
+        Access Denied. You are logged in as: {user?.name || 'Unknown'} ({user?.role || 'No Role'})
       </div>
     );
   }
