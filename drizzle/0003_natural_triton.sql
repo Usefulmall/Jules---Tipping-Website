@@ -1,0 +1,1 @@
+ALTER TABLE `workers` MODIFY COLUMN `bankName` enum('FNB','ABSA','Standard Bank','Nedbank','Capitec','Investec','TymeBank','African Bank','Bidvest Bank','Discovery Bank') NOT NULL;

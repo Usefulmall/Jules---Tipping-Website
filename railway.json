@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "name": "Digital Tipping Platform - Railway",
+  "description": "Worker tipping platform deployed on Railway with Paystack integration",
+  "env": {
+    "DATABASE_URL": {
+      "description": "MySQL database connection string",
+      "required": true
+    },
+    "PAYSTACK_PUBLIC_KEY": {
+      "description": "Paystack public key for frontend",
+      "required": true
+    },
+    "PAYSTACK_SECRET_KEY": {
+      "description": "Paystack secret key for backend",
+      "required": true
+    },
+    "NODE_ENV": {
+      "description": "Node environment",
+      "value": "production"
+    },
+    "PORT": {
+      "description": "Port for the application",
+      "value": "3000"
+    },
+    "JWT_SECRET": {
+      "description": "Secret for JWT signing",
+      "required": true
+    },
+    "OWNER_OPEN_ID": {
+      "description": "Owner OpenID for admin access",
+      "required": true
+    }
+  },
+  "build": {
+    "command": "pnpm install && pnpm build"
+  },
+  "start": {
+    "command": "pnpm db:push && node dist/index.js"
+  }
+}

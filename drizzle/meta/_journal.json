@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1775673191144,
+      "tag": "0000_premium_devos",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1775674241688,
+      "tag": "0001_useful_mordo",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1776064291340,
+      "tag": "0002_rich_songbird",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1776065411370,
+      "tag": "0003_natural_triton",
+      "breakpoints": true
+    }
+  ]
+}

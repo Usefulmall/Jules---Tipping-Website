@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: tipping-platform
+    runtime: node
+    buildCommand: pnpm install && pnpm build
+    startCommand: pnpm db:push && node dist/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: DATABASE_URL
+        sync: false
+      - key: PAYSTACK_PUBLIC_KEY
+        sync: false
+      - key: PAYSTACK_SECRET_KEY
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: OWNER_OPEN_ID
+        sync: false
